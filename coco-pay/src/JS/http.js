@@ -99,9 +99,9 @@ instance.interceptors.request.use((config) => {
   }*/
   //console.log(config)
   if (config.method === 'post') {
-    config.data = qs.stringify(config.data)
+    config.data = qs.parse(config.data)
   } else {
-    config.url = `${config.url}?${qs.stringify(config.data)}`
+    config.url = `${config.url}?${qs.parse(config.data)}`
   }
   return config
 }, (error) => {

@@ -35,28 +35,10 @@ export default new Router({
           meta: {title: '商户列表'}
         },
         {
-          path: '/agrentManage/MerchantAdd',
-          name: 'MerchantAdd',
-          component: () => import('../components/agrentManage/MerchantAdd.vue'),
-          meta: {title: '添加商户'}
-        },
-        {
           path: '/agrentManage/EditPassword',
           name: 'EditPassword',
           component: () => import('../components/agrentManage/EditPassword.vue'),
           meta: {title: '修改支付密码'}
-        },
-        {
-          path: '/agrentManage/BindingGoole',
-          name: 'BindingGoole',
-          component: () => import('../components/agrentManage/BindingGoole.vue'),
-          meta: {title: '绑定谷歌验证器'}
-        },
-        {
-          path: '/agrentManage/Nafe',
-          name: 'Nafe',
-          component: () => import('../components/agrentManage/Nafe.vue'),
-          meta: {title: '纳费'}
         },
         {
           path: '/fund/fundWater',
