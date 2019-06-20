@@ -4,15 +4,13 @@
       :default-active="$route.path"
       class="el-menu-vertical-demo menuList"
       :unique-opened="true"
-      @open="handleOpen"
-      @close="handleClose"
+      @select="handSelect"
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b"
       v-for="(item,itemKey) in menuList" :key="itemKey"
-      :router="true"
     >
-      <el-submenu :index="item.routerLink"  v-if="item.childrenList" style="text-align:left;text-indent:20px;">
+      <!--:index="item.routerLink"-->
+      <el-submenu :index="item.id.toString()"  v-if="item.childrenList" style="text-align:left;text-indent:20px;">
         <template slot="title">
           <!--<i class="el-icon-location"></i>-->
           <span>{{ item.title }}</span>
@@ -22,14 +20,14 @@
           <el-menu-item index="1-4-1">选项1</el-menu-item>
         </el-submenu>-->
         <el-menu-item-group v-for="(itemChildren,childrenKey) in item.childrenList" :key="childrenKey">
-          <el-menu-item :index="itemChildren.routerLink">
-            {{ itemChildren.title }}
+          <el-menu-item :index="itemChildren.id.toString()">
+            <router-link :to="itemChildren.routerLink" tag="div">{{ itemChildren.title }}</router-link>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item :index="item.routerLink" v-else @click="colorSpan"  style="text-align:left;text-indent:20px;">
+      <el-menu-item :index="item.id.toString()" v-else @click="colorSpan"  style="text-align:left;text-indent:20px;">
         <!--<span>{{ item.title }}</span>-->
-        {{ item.title }}
+        <router-link :to="item.routerLink" tag="div">{{ item.title }}</router-link>
       </el-menu-item>
     </el-menu>
   </div>
@@ -64,10 +62,7 @@ export default {
     }
   },
   methods: {
-    handleOpen (key, keyPath) {
-      // console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
+    handSelect (key, keyPath) {
       // console.log(key, keyPath)
     },
     colorSpan () {
