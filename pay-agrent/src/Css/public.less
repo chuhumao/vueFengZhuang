@@ -1,0 +1,63 @@
+.marginTop{
+  margin:10px 0;
+}
+.clear{
+  margin:0;
+  padding:0;
+  clear:both;
+  display: block;
+}
+.textAlignRight{
+  text-align:right;
+}
+/* 绿色竖线 */
+.selectText{
+  display: flex;
+  text-align:left;
+  margin:20px  0 30px;
+  height:30px;
+  i{
+    flex: 0.004;
+    width:4px;
+    height:36px;
+    border:1px solid #05DAB0;
+    background-color:#05DAB0;
+    margin-right:10px;
+  }
+  span{
+    flex: 1;
+    line-height:40px;
+    font-size:24px;
+  }
+}
+
+.selectInput{
+  display: flex;
+  flex-wrap:wrap;
+  align-items:center;
+  margin:20px 0;
+  .selectInput-content{
+    float: left;
+    //width: 34%;
+    width: 32%;
+    margin-top: 10px;
+    text-align: left;
+    .el-input{
+      //width:66%;
+      width:60%;
+    }
+    .el-select{
+      width: 60%;
+    }
+    span{
+      display: inline-block;
+      width: 100px;
+      float: left;
+      line-height: 38px;
+      text-align: right;
+    }
+  }
+}
+.selectInput .selectInput-content-last{
+  width:510px!important;
+}
