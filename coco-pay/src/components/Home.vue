@@ -41,7 +41,8 @@ export default {
   },
   methods: {
     msgObj () {
-      // console.log(1)
+      // console.log(1)else {
+      this.$router.push({name: 'BasicInfo'})
     }
   }
 }
