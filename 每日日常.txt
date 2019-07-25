@@ -1,0 +1,265 @@
+2019.6.24：
+		Math.PI ：是指圆周率；
+		在javascript中，两个对象相等，他们	会通过相互引用进行交互，改变其中一个对象，则相对应的对象都会发生改变；
+		number 和 new number（）区别，看起来new number 和 number一模一样的，但是 new number内置函数跟number不一样。
+		
+2019.6.25
+		es6的findIndex 直接可以找寻数组的下标；
+		用法：const index = this.table.findIndex(item => item.text=== val.text);
+		类似于forEach的写法，
+		/*splice删除*/
+		deleteTextArr (val) {
+		  const index = this.table.findIndex(item => item.text=== val.text);
+		  变量.splice(index,1);
+		  val.bol = false;
+		},
+		
+2019.6.26
+		必须字母加数字：^(?=.*[A-Za-z])(?=.*\d)[\s\S]{8,20}$（正则）
+		
+2019.7.2
+		对于 sarah，我们没有使用 new 关键字。当使用 new 时，this 引用我们创建的空对象。当未使用 new 时，this 引用的是全局对象（global object）。
+		Event Bubbling（事件冒泡）
+		阻止事件冒泡（stopPropagation）
+		在捕获（capturing）阶段中，事件从祖先元素向下传播到目标元素。当事件达到目标（target）元素后，冒泡（bubbling）才开始。
+		
+		除了基本对象（base object），所有对象都有原型。基本对象可以访问一些方法和属性，比如 .toString。这就是为什么你可以使用内置的 JavaScript 方法！所有这些方法在原型上都是可用的。虽然 JavaScript 不能直接在对象上找到这些方法，但 JavaScript 会沿着原型链找到它们，以便于你使用。
+		let number = 0
+		console.log(number++)
+		console.log(++number)
+		console.log(number)
+当第一次使用number++的时候，则是number后续+1，而在第二次console的时候，触发之前的number后自增，number则在第二次变成了1，而第二次的consol则在number使用前自增，数值则变成 2，第三次的打印则变成了 第二次算法用完，成为最后的值
+
+2019.7.3
+		toString()方法:如果变量为数字,那么toSting接受一个参数(该参数为数字).也可不传.不传的情况下,默认转化为字符串.传则将变量转化为参数进制的字
+		
+2019.7.4
+vue 复制：
+npm install --save vue-clipboard2
+import Vue from 'vue'
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
+<div class="copyBox">
+      sysAppId：<span>{{sysAppIds}}</span>
+      <el-button class="ml10" type="text" size="medium"
+        v-clipboard:copy="sysAppIds"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError">点击复制</el-button>
+</div>
+
+has：判断是否含有某个值
+is：判断是否为某个值
+reduce：计算元素总和
+
+ *对象：
+	hasOwnProperty ： 在对象自身查找属性，而不到原型上查找 （所有对象的键，在底层都是以string类型呈现）
+	isPrototypeOf： 判断一个对象是否是某个实例的原型对象
+	Person（父函数方法）.call(this) // * 利用call调用Person上的属性方法拷贝一份到Student（另一个子函数方法）
+	上面在子构造函数（Student）中利用call调用父构造函数（Person）的方式，叫做借助构造函数继承
+	
+	SyntaxError：当Javascript语言解析代码时,Javascript引擎发现了不符合语法规范的tokens或token顺序时抛出SyntaxError.
+	new SyntaxError([message[, fileName[, lineNumber]]])
+	message
+        可选的. 可阅读的错误描述信息
+    fileName 
+        可选的. 包含引发异常的代码的文件名
+    lineNumber 
+        可选的. 包含引发异常的代码的行号
+
+2019.7.9
+	数字反转：123 变成 321 ，负数 -123 变成 -321
+	提示：reverse, split, jion
+	需要if判断
+	
+2019.7.10
+    解决ie11无法打开vue项目；
+    ①npm install --save-dev babel-polyfill
+    ② 在main.js中引入 import "babel-polyfill"
+    ③ 在build文件夹中webpack.base.conf.js将
+    //entry: {
+        // app: ‘./src/main.js’
+    // },
+    替换为
+    entry: {
+        app: ['babel-polyfill',  './src/main.js']
+    },
+    在index.html页面中加上meta头：<meta http-equiv="X-UA-Compatible"  content="IE=EDGE" />
+    
+2019.7.11
+    解决Element-Ui菜单组件无法点击一个子菜单，关闭另一个子菜单。
+      unique-opened：按照官网上的介绍，属于自动关闭另一个菜单；
+      router：自动跳转，相当于使用了router-link一样；
+      :default-openeds="数组型变量"：打开某个子菜单，关闭另一个菜单；
+      :default-active="$route.path"：获取到当前的菜单路径，显示菜单；
+      @open="handOpen"： 点击打开的菜单路径；
+      自己写的菜单JSON格式：
+      [
+        {title: '代理商管理',
+          id: 1,
+          imgSrc: require('../../assets/Home/AgrentUserDaiFu.png'),
+          routerLink: '/agrentManage',
+          childrenList: [
+            {title: '基本信息', id: 11, routerLink: '/agrentManage/BasicInfo', imgSrc: require('../../assets/Home/AgrentUserInfo.png')},
+            {title: '商户列表', id: 12, routerLink: '/agrentManage/MerchantList', imgSrc: require('../../assets/Home/AgrentMerchrant.png')},
+            {title: '添加商户', id: 13, routerLink: '/agrentManage/MerchantAdd', imgSrc: require('../../assets/Home/AgrentAddUser.png')},
+            {title: '修改密码', id: 14, routerLink: '/agrentManage/EditPassword', imgSrc: require('../../assets/Home/AgrentXiugaimima.png')},
+            {title: '修改支付密码', id: 15, routerLink: '/agrentManage/EditPayPassword', imgSrc: require('../../assets/Home/AgrentXiugaizhifumima.png')},
+            // {title: '绑定谷歌验证器', id: 16, routerLink: '/agrentManage/BindingGoole'},
+            // {title: '纳费', id: 17, routerLink: '/agrentManage/Nafe'},
+          ]
+        },
+     ]
+      activeIndex：【】 对应上方的 ：default-openeds= activeIndex；
+      methods：
+        点击打开的子菜单
+        handOpen (key, keyPath) {
+          this.activeIndex = [key]
+        },
+      
+2019.7.12
+      如果需要更改掉elment-BTN的点击颜色和触摸颜色，需要更改css的hover和focus；
+    
+ 2019.7.15
+        如果需要进入严格模式，那么需要加入一行 "use strict";
+        场景一：
+        <script>  
+              "use strict";  
+              console.log("这是严格模式。");  
+        </script>  
+        场景二：
+        function ages () {
+            'use strict'
+            age = 1
+            console.log(age);
+        }
+        ages() 
+        对比场景二：
+        function notStrict() {  
+            return "这是正常模式。";  
+        }  
+        
+        eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码；
+        语法：eval(string)；
+                  string	必需。要计算的字符串，其中含有要计算的 JavaScript 表达式或要执行的语句。
+        
+        ?事件：
+                onclick 点击
+                onblur：失去焦点
+                onfocus： 得到焦点
+                
+                onkeydown：按下键盘
+                onkeyup： 松开键盘
+                onkepress： 按住键盘
+                
+                onmousedown： 按下鼠标
+                onmouseup：松开鼠标
+                onmouseover： 把鼠标放到上面
+                ommousemove： 移动鼠标
+                onmouseout： 移开鼠标
+                
+                onload：页面加载
+                onchange：改变
+                onsubmit：表单提交。
+                
+    continue：跳出此判断，继续进行下一个迭代操作
+    for (let i = 1; i < 5; i++) {
+      if (i === 3) continue
+      console.log(i)
+    }
+    输出于：1 2 4
+    
+    const foo = () => console.log('First')
+    const bar = () => setTimeout(() => console.log('Second'))
+    const baz = () => console.log('Third')
+    bar()，foo()，baz()
+    在浏览器中，我们不仅有运行时引擎，还有一个叫做 WebAPI 的东西。WebAPI 提供了 setTimeout 函数，也包含其他的，例如 DOM。
+    只要写入setTimeout就会将这里的首先运行，但是会在最后调用；
+        1、将 callback 推送到 WebAPI 后，setTimeout 函数本身(但不是回调！)将从栈中弹出。
+        2、现在，foo 被调用，打印 "First"。foo 从栈中弹出，baz 被调用. 打印 "Third"。
+        3、WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名为 queue 的地方。
+        4、这就是事件循环开始工作的地方。一个事件循环查看栈和任务队列。如果栈是空的，它接受队列上的第一个元素并将其推入栈。
+        5、bar 被调用，打印 "Second"，然后它被栈弹出。
+    
+    let pip = document.getElementById('pip').outerHTML // 不但展示文本，也会将标签展示出来
+    console.log(pip);
+    let pop = document.getElementById('pop').innerHTML // 展示文本
+    console.log(pop);
+    // 如果不想这样，可以使用event.stopPropagation；
+    // 导致事件的最深嵌套的元素是事件的 target。你可以通过 event.stopPropagation 来停止冒泡。
+    
+    apply，call ，bind
+    在 javascript 中，call 和 apply 都是为了改变某个函数运行时的上下文（context）而存在的，换句话说，就是为了改变函数体内部 this 的指向。
+JavaScript 的一大特点是，函数存在「定义时上下文」和「运行时上下文」以及「上下文是可以改变的」这样的概念。
+    this 是你想指定的上下文，他可以是任何一个 JavaScript 对象(JavaScript 中一切皆对象)，call 需要把参数按顺序传递进去，而 apply 则是把参数放在数组里。
+    案例：作用域.call(this, arg1, arg2);  作用域.apply(this, [arg1, arg2])
+    第一步：定义对象
+    function fruits() {} 
+    第二步：创建对象方法  
+    fruits.prototype = {
+        color: "red",
+        say: function() {
+            console.log("My color is " + this.color);
+        }
+    }
+     第三步：使用对象方法
+    var apple = new fruits;
+    apple.say();    //My color is red
+    第四步：利用 apply 和 call 改变this指向；
+    banana = {
+        color: "yellow"
+    }
+    apple.say.call(banana);     //My color is yellow
+    apple.say.apply(banana);    //My color is yellow
+    
+    bind()最简单的用法是创建一个函数，使这个函数不论怎么调用都有同样的this值。
+    自己理解的：就是将被改变的this，重新指回你想要的那个this指向，但是bind，并不会像call 立即执行，则会返回一个作用域方法
+    this.num = 9; 
+    var mymodule = {
+      num: 81,
+      getNum: function() { 
+        console.log(this.num);
+      }
+    };
+
+    mymodule.getNum(); // 81
+
+    var getNum = mymodule.getNum;
+    getNum(); // 9, 因为在这个例子中，"this"指向全局对象
+
+    var boundGetNum = getNum.bind(mymodule);
+    boundGetNum(); // 81
+    
+     falsy 值（6种）：
+     undefined，null，NaN，0，单引号 ''  ， (empty string)，false
+     truthy 值：
+     Function 构造函数, 比如 new Number 和 new Boolean，是 truthy。
+
+    当超过数组长度时：
+    const numbers = [1, 2, 3]
+    numbers[10] = 11
+    console.log(numbers)
+    当你为数组设置超过数组长度的值的时候， JavaScript 会创建名为 "empty slots" 的东西。它们的值实际上是 undefined。你会看到以下场景：[1, 2, 3, 7 x empty, 11]
+    这取决于你的运行环境（每个浏览器，以及 node 环境，都有可能不同）
+    
+2019.7.17
+    为了避免有多余的变量，我们可以使用 `"use strict"。这能确保当你声明变量时必须赋值。
+    
+2019.7.19
+reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。
+    array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+    total	必需。初始值, 或者计算结束后的返回值。
+    currentValue	必需。当前元素
+    currentIndex	可选。当前元素的索引
+    arr	可选。当前元素所属的数组对象。
+     *initialValue 可选。传递给函数的初始值
+
+[...‘string’] 扩展运算符，类似于split 分割  【's','t','r','i','n','g'】；
+
+ 2019.7.22
+ 1、在需要创建 .gitignore 文件的文件夹, 右键选择Git Bash 进入命令行，进入项目所在目录。
+2、输入 touch .gitignore ，生成“.gitignore”文件。
+3、在”.gitignore” 文件里输入你要忽略的文件夹及其文件就可以了。（注意格式）
+
+2019.7.25
+            this.$refs['addParams'].resetFields(); （清除掉validate的判空）
