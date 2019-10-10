@@ -11,18 +11,25 @@ Vue.use(Element)
 
 Vue.config.productionTip = false
 
-/* axios.interceptors.request.use(
-  config => {
-     if (store.state.token) {
-      config.headers.common['ugtoken'] = store.state.token
-    }
-    // config.headers = 'danny'
-    return config
-  },
-  err => {
-    return Promise.reject(err)
-  }
-) */
+/* 防止未登录跳转到里面页面 */
+// router.beforeEach((to, from, next) => {
+//   // console.log(to)
+//   if (to.path == '/login') {
+//     sessionStorage.removeItem('user_token')
+//     sessionStorage.removeItem('user_tokenTwo')
+//     sessionStorage.removeItem('user_name')
+//     sessionStorage.removeItem('user_clientId')
+//   }
+//   // next()
+//   const userToken = sessionStorage.getItem('user_token')
+//   const userTokenTwo = sessionStorage.getItem('user_tokenTwo')
+//   const showToken = userToken || userTokenTwo
+//   if (!showToken && to.path != '/login') {
+//     next({ path: '/login' })
+//   } else {
+//     next()
+//   }
+// })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

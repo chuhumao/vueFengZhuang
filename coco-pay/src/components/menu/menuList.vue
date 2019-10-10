@@ -2,32 +2,45 @@
   <div>
     <el-menu
       :default-active="$route.path"
-      class="el-menu-vertical-demo menuList"
-      :unique-opened="true"
+      router
+      :default-openeds="activeIndex"
+      class="el-menu-vertical-demo menuList mymenu"
+      unique-opened
       @select="handSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      v-for="(item,itemKey) in menuList" :key="itemKey"
+      @open="handleOpen"
+      background-color="#304156"
+      text-color="#A7B1C3"
+      v-for="(item,itemKey) in menuList"
+      :key="itemKey"
     >
-      <!--:index="item.routerLink"-->
-      <el-submenu :index="item.id.toString()"  v-if="item.childrenList" style="text-align:left;text-indent:20px;">
+      <el-submenu
+        :index="item.routerLink+ ''"
+        v-if="item.childrenList"
+        style="text-align:left;text-indent:20px;"
+      >
         <template slot="title">
-          <!--<i class="el-icon-location"></i>-->
-          <span>{{ item.title }}</span>
+          <!--<img :src="item.imgSrc" alt />-->
+          <span class="itemList">{{ item.title }}</span>
         </template>
-        <!--<el-submenu index="1-4" >
-          <template slot="title">{{itemChildren.title}}</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>-->
-        <el-menu-item-group v-for="(itemChildren,childrenKey) in item.childrenList" :key="childrenKey">
-          <el-menu-item :index="itemChildren.id.toString()">
-            <router-link :to="itemChildren.routerLink" tag="div">{{ itemChildren.title }}</router-link>
+        <el-menu-item-group
+          v-for="(itemChildren,childrenKey) in item.childrenList"
+          :key="childrenKey"
+        >
+          <el-menu-item :index="itemChildren.routerLink+ ''" @click="colorSpan(itemChildren)">
+            <!--<img v-show="!itemChildren.selectJudgeImg" :src="itemChildren.imgSrc" alt />-->
+            <!--<img v-show="itemChildren.selectJudgeImg" :src="itemChildren.imgSrcTwo" alt />-->
+            <span class="itemList">{{ itemChildren.title }}</span>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item :index="item.id.toString()" v-else @click="colorSpan"  style="text-align:left;text-indent:20px;">
-        <!--<span>{{ item.title }}</span>-->
-        <router-link :to="item.routerLink" tag="div">{{ item.title }}</router-link>
+      <el-menu-item
+        class="itemList"
+        :index="item.routerLink+ ''"
+        v-else
+        style="text-align:left;text-indent:20px;"
+      >
+        <!--<img :src="item.imgSrc" alt />-->
+        <span class="itemList">{{ item.title }}</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -38,14 +51,25 @@ export default {
   name: 'menuList',
   data () {
     return {
+      // 点击时获取到的菜单
+      activeIndex: [],
       openList: null,
+      // 接收菜单数组并调用渲染
       menuList: [
         {title: '代理商管理',
           id: 1,
+          // imgSrc: require('../../assets/menu/merchantFamily.png'),
+          routerLink: '/merchantManage',
           childrenList: [
-            {title: '基本信息', id: 11, routerLink: '/agrentManage/BasicInfo'},
+            {
+              title: '基本信息',
+              id: 11,
+              routerLink: '/agrentManage/BasicInfo',
+              selectJudgeImg: false,
+              // imgSrc: require('../../assets/menu/merchantMessage.png'),
+              // imgSrcTwo: require('../../assets/menu/merchantMessageTwo.png')
+            },
             {title: '商户列表', id: 12, routerLink: '/agrentManage/MerchantList'},
-            {title: '修改密码', id: 14, routerLink: '/agrentManage/EditPassword'},
           ]
         },
         {
@@ -62,21 +86,37 @@ export default {
     }
   },
   methods: {
+    handleOpen (key, keyPath) {
+      // console.log(key)
+      // 当前打开的sub-menu的 key 数组 关闭其他子菜单
+      this.activeIndex = [key]
+    },
     handSelect (key, keyPath) {
       // console.log(key, keyPath)
     },
-    colorSpan () {
-      // console.log(1)
-    },
     getBreadcrumb () {
-      console.log(this.$route)
-      this.openList = this.$route.path
-    }
+      // this.openList = this.$route.path
+    },
+    // 点击子菜单更换图片
+    colorSpan (val) {
+      // console.log(val)
+      this.menuList.forEach((item) => {
+        if (item.childrenList) {
+          item.childrenList.forEach((itemChildren) => {
+            itemChildren.selectJudgeImg = false
+          })
+        }
+      })
+      val.selectJudgeImg = !val.selectJudgeImg
+      sessionStorage.setItem('menuListArr', JSON.stringify(this.menuList))
+    },
   },
   watch: {
-    $route () {
-      this.getBreadcrumb()
-    }
+    $route: 'getBreadcrumb'
+  },
+  created () {
+    // console.log(qs.stringify(sessionStorage.getItem('menuList')))
+    this.menuList = JSON.parse(sessionStorage.getItem('menuListArr')).length > 0 ? JSON.parse(sessionStorage.getItem('menuListArr')) : this.menuList
   }
 }
 </script>

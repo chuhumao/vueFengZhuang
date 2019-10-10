@@ -93,15 +93,18 @@ const instance = axios.create({
 
 // POST传参序列化
 instance.interceptors.request.use((config) => {
-  // let user = JSON.parse(sessionStorage.getItem('operate_user_info'))
-  /*if (user) {
-    config.headers.Authentication = user.token
-  }*/
-  //console.log(config)
+  // let user = sessionStorage.getItem('user_token')
+  // let userTwo = sessionStorage.getItem('user_tokenTwo')
+  // if (user) sessionStorage.removeItem('user_tokenTwo')
+  // else sessionStorage.removeItem('user_token')
+  // if (user || userTwo) {
+  //   config.headers.common['client_auth_token'] = userTwo
+  //   config.headers.common['client_auth_token_temp'] = user
+  // }
   if (config.method === 'post') {
     config.data = qs.parse(config.data)
   } else {
-    config.url = `${config.url}?${qs.parse(config.data)}`
+    config.url = `${config.url}?${qs.stringify(config.data)}`
   }
   return config
 }, (error) => {
@@ -110,37 +113,9 @@ instance.interceptors.request.use((config) => {
 
 // 返回状态判断
 instance.interceptors.response.use((res) => {
-  if (res.data.flag === 1000) {
-    console.log('参数错误')
-  }
-  if (res.data.flag === 1100) {
-    console.log('数据类型错误')
-  }
-  if (res.data.flag === 1200) {
-    console.log('逻辑错误')
-  }
-  if (res.data.flag === 1300) {
-    console.log('数据库操作错误')
-  }
-  if (res.data.flag === 1400) {
-    console.log('请求方式错误')
-  }
-  if (res.data.flag === 1500) {
-    console.log('失败认证')
-  }
-  if (res.data.flag === 1600) {
-    console.log('操作失败')
-  }
-  if (res.data.flag === 2000) {
-    sessionStorage.removeItem('operate_user_info')
-    console.log('登录信息失效')
-  }
-  if (res.data.flag == 6666) {
-    router.push({path: '/login'})
-    alert('登录已失效，请重新登录！')
-  }
   return res
 }, (error) => {
+  /* 判断状态码是否错误，跳转到登录页面*/
   return Promise.reject(error)
 })
 

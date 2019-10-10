@@ -35,12 +35,6 @@ export default new Router({
           meta: {title: '商户列表'}
         },
         {
-          path: '/agrentManage/EditPassword',
-          name: 'EditPassword',
-          component: () => import('../components/agrentManage/EditPassword.vue'),
-          meta: {title: '修改支付密码'}
-        },
-        {
           path: '/fund/fundWater',
           name: 'fundWater',
           component: () => import('../components/fund/fundWater.vue'),

@@ -285,3 +285,112 @@ reduce() ·½·¨½ÓÊÕÒ»¸öº¯Êı×÷ÎªÀÛ¼ÓÆ÷£¬Êı×éÖĞµÄÃ¿¸öÖµ£¨´Ó×óµ½ÓÒ£©¿ªÊ¼Ëõ¼õ£¬×îÖÕ¼ÆË
             
 2019.7.31
         position:sticky£¬Õ³ĞÔ¶¨Î»ÒªÆğ×÷ÓÃ£¬ĞèÒªÉèÖÃ×îºóÖÍÁôÎ»ÖÃ¡£chromeÓĞbug£¬firefoxÍêÃÀ
+        
+2019.8.1
+        var browser={
+            versions:function(){
+            var u = window.navigator.userAgent;
+            return {
+                trident: u.indexOf('Trident') > -1, //IEÄÚºË
+                presto: u.indexOf('Presto') > -1, //operaÄÚºË
+                webKit: u.indexOf('AppleWebKit') > -1, //Æ»¹û¡¢¹È¸èÄÚºË
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //»ğºüÄÚºË
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/)||!!u.match(/AppleWebKit/), //ÊÇ·ñÎªÒÆ¶¯ÖÕ¶Ë
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //iosÖÕ¶Ë
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //androidÖÕ¶Ë»òÕßucä¯ÀÀÆ÷
+                iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //ÊÇ·ñÎªiPhone»òÕß°²×¿QQä¯ÀÀÆ÷
+                iPad: u.indexOf('iPad') > -1, //ÊÇ·ñÎªiPad
+                webApp: u.indexOf('Safari') == -1 ,//ÊÇ·ñÎªwebÓ¦ÓÃ³ÌĞò£¬Ã»ÓĞÍ·²¿Óëµ×²¿
+                weixin: u.indexOf('MicroMessenger') == -1 //ÊÇ·ñÎªÎ¢ĞÅä¯ÀÀÆ÷
+                };
+            }()
+        }
+        document.writeln(" ÊÇ·ñÎªÒÆ¶¯ÖÕ¶Ë: "+browser.versions.mobile);
+        document.writeln(" iosÖÕ¶Ë: "+browser.versions.ios);
+        document.writeln(" androidÖÕ¶Ë: "+browser.versions.android);
+        document.writeln(" ÊÇ·ñÎªiPhone: "+browser.versions.iPhone);
+        document.writeln(" ÊÇ·ñiPad: "+browser.versions.iPad);
+        document.writeln(navigator.userAgent);
+        
+2019.8.5
+instanceof ÔËËã·ûÓÃÀ´²âÊÔÒ»¸ö¶ÔÏóÔÚÆäÔ­ĞÍÁ´ÖĞÊÇ·ñ´æÔÚÒ»¸ö¹¹Ôìº¯ÊıµÄ prototype ÊôĞÔ¡£
+µ«ÊÇ instanceofÊÇÅĞ¶ÏÇ°ÃæµÄ¶ÔÏó ÊÇ·ñÊÇºóÃæÀà£¨¶ÔÏó£©µÄÊµÁ¦£¬Ëü²»´ú±í¼Ì³Ğ£»
+     demo£º(Super instanceof SubClass) false£»
+Èç¹ûÅÂÍü¼Ç¶ÔÏóÊµÀı»¯µÄ»°£¬ÄÇÃ´¾ÍÔÚ·½·¨×÷ÎªÒ»¸öÊµÀı¼à¿Ø
+let Book = function (title,time,type) {
+    if(this instanceof Book) {
+        this.title = title;
+        this.time = time;
+        this.type = type;
+    } else {
+        return new Bookl(title, time, type);
+    }
+}
+¾Í¿ÉÒÔÖ±½ÓÈ¥Ê¹ÓÃ£ºvar book = Book(1 , 2 ,3);
+
+³£¼ûµÄÀà¼Ì³Ğ£º
+    //  ÉùÃ÷¸¸Àà
+    function Super() { 
+        this.superValue = true;
+    }
+    //  Îª¸¸ÀàÌí¼Ó¹²ÓĞ·½·¨
+    Super.prototype.getSuperValue = function ( )  {
+        return this.superValue;
+    }
+    // ÉùÃ÷×ÓÀà
+    function SubClass( ) {
+        this.subValue = false;
+    }
+ ´ÓÕâÒ»²½£¬ÏÖÔÚ¿ªÊ¼¼Ì³Ğ
+    //  ¼Ì³Ğ¸¸Àà
+    SubClass.prototype = new  Super() ;
+    // Îª×ÓÀàÌí¼Ó¹²ÓĞ·½·¨
+    SubClass.prototype.getSuperValue = function ( )  {
+        return this.subValue;
+    }
+        
+        21Ò³
+
+2019.8.6
+Á´½Ó£ºhttps://pan.baidu.com/s/1GUj9c24JXXmJuuhmryV-tg 
+ÌáÈ¡Âë£º3mzr 
+¸´ÖÆÕâ¶ÎÄÚÈİºó´ò¿ª°Ù¶ÈÍøÅÌÊÖ»úApp£¬²Ù×÷¸ü·½±ãÅ¶
+ÕâÊÇ2018°æ±¾µÄpr
+
+2019.8.7
+            È¡ÏûvalidateÑéÖ¤
+            this.$refs['form'].resetFields();
+            validateµÄÅĞ¶Ï£¬¶¼ÊÇ±ØĞëstring£¬Èç¹ûÊÇnumberÊÇÎŞ·¨ÅĞ¶Ï£»
+2019.8.12
+	    tables£ºÊÇ±í¸ñÀïÃæµÄ <Table border stripe ref="tables" >
+            this.$refs.tables.selectAll(false);
+
+2019.8.13
+	vueÖĞÊ¹ÓÃ¸»ÎÄ±¾£ºvuequilleditorºÍvue2editor
+	https://www.sojson.com/jquery/down.html£¨JQÏÂÔØµØÖ·£©
+2019.8.15
+	isNaNÓÃÀ´ÅĞ¶Ï paseIntºÍpaseFolatÊÇ·ñµ÷ÓÃ×ª»»³É¹¦¡££¨×Ô¼º³¢ÊÔ£ºtrueÎªstring; falseÎªnumber£©
+2019.8.19
+	fill£ºÊÇ¸øÊı×éÔö¼ÓÌî³äÎï£¬Èç¹ûÊı×éÎŞÖµ£¬»òÕßĞèÒªÊ²Ã´£¬Ôò¿ÉÒÔ 
+	let a = new Array(3);
+	console.log(a.fill('*'));
+	["*", "*", "*"]
+
+2019.8.20
+	¾ÅĞÍÈË¸ñ£ºÍêÃÀĞÍ£¬È«°®ĞÍ£¬³É¾ÍĞÍ£¬ÒÕÊõĞÍ£¬ÖÇÄÜĞÍ£¬ÖÒ³ÏĞÍ£¬»îÔ¾ĞÍ£¬ÁìĞäĞÍ£¬ºÍÆ½ĞÍ£»
+2019.8.22
+	±£ÁôÁùÎ»Ğ¡Êıµã£¨ÕıÔò£©£º/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{0,6})?$/
+2019.8.16
+	Èç¹ûÊÇÏñµã»÷µ¥¸öliÖĞµÄimg£¬ĞèÒª¸ü¸ÄclassµÄ»°£¬
+	¿ÉÒÔ¸ù¾İ v-for=(item,index) in list :key="index" ,:class="±äÁ¿=index£¿¡®action¡¯:'' ÕâÑùÀ´½øĞĞÅĞ¶Ï£¬
+¶øÇÒµã»÷µÄÊ±ºò£¬½«index´«µ½·½·¨ÀïÃæ£¬½øĞĞ±äÁ¿½ÓÊÕ
+
+2019.9.12 
+momentµÄÓÃ·¨×ª»»Îª2019-09-12 00:00:00
+moment(this.params.endTime).format('YYYY-MM-DD HH:mm:ss')
+
+2019.9.18
+Vue v-model ¶¯Ì¬°ó¶¨£¨Êı×é±äÁ¿£ºdataList£©£¬£¨´òÓ¡Ö±½Ó´òÓ¡£ºdataList£©
+<li v-for="(item, key) in dataList">
+  <input type="text"  v-model="item.input_text">
+</li>
