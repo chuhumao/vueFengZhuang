@@ -394,3 +394,99 @@ Vue v-model 动态绑定（数组变量：dataList），（打印直接打印：dataList）
 <li v-for="(item, key) in dataList">
   <input type="text"  v-model="item.input_text">
 </li>
+
+2019.10.10
+如果需要进行深度拷贝，则需要在写公用方法的时候，进行 数组 和 对象的判断。
+var copy = Array.isArray(obj) ? [] : {};  判断是否是数组！
+
+if ( cache === void 0 ) cache = [];
+使用void(0)是用来代替undefined，因为undefind不是JS的保留字。
+
+2019.10.17
+Resolution Test
+根据原页面，复制原页面 新建一个不同分辨率的网页。
+
+2019.10.18
+购买服务器地址：https://my.vultr.com/；
+函数方法里面的参数：
+
+    function age(x,y) {
+        // let x = 1
+        // const y = 2
+        var x = 1
+        console.log(x);
+        console.log(y);
+    }
+    age(3,4)
+如果使用let 与 const 则无法将参数重新定义，会报错（使用参数默认值时，函数不能有同名参数。）；
+而var可以；
+
+2019.10.21
+/* 昔归 */
+柴门闻犬吠，风雪夜归人；
+/* 远方 */
+醉后不知天在水，满船清梦压星河；
+南朝四百八十寺，多少楼台烟雨中；
+小楼一夜听春雨，深巷明朝卖杏花；
+
+/* 乡愁 */
+剪不断，理还乱，是离愁，别是一番滋味在心头。
+
+/* 明悟 */
+少年不识愁滋味，爱上层楼，爱上层楼。为赋新词强说愁。而今识尽愁滋味，欲说还休，欲说还休。却道天凉好个秋。
+少年听雨歌楼上，红烛昏罗帐。壮年听雨客舟中，江阔云低，断雁叫西风。而今听雨僧庐下，鬓已星星也。悲欢离合总无情，一任阶前，点滴到天明。
+
+2019.10.23
+页面导入样式时，使用link和@import有什么区别？
+区别：
+1.link是HTML标签，@import是css提供的。
+2.link引入的样式页面加载时同时加载，@import引入的样式需等页面加载完成后再加载。
+3.link没有兼容性问题，@import不兼容ie5以下。
+4.link可以通过js操作DOM动态引入样式表改变样式，而@import不可以。
+
+---
+vue开发调试神器vue-devtools使用详解
+
+
+2019.10.28
+setTimeout 是等主线流程执行完毕之后，栈有空余时间，才会去加载setTimeout
+
+2019.10.30
+elenement时间组件
+
+                        <el-date-picker
+                                class="selectDate" // class函数
+                                v-model="date2"
+                                @change="formate2" // 点击时，更换新时间函数
+                                type="datetime"
+                                placeholder="选择开始日期时间"
+                                default-time="23:59:59"  // 设置为默认值
+                                value-format="yyyy-MM-dd HH:mm:ss" // 时间格式
+			>
+                        </el-date-picker>
+在设置value-format格式时，再次选取的时间函数则变成设置的格式，不再是最初始的未转化的格式
+
+2019.10.31
+如果要进行vue兄弟间传值，需要创建一个公用js文件，
+1.建立公共文件，并引入  公用  bus
+
+新建Bus.js文件。只需两句代码。
+1 import Vue from 'vue'
+2 export default new Vue;
+然后在需要传递消息的两个组件引入   import Bus from '@/components/utils/Bus.js';
+3.接受消息
+接受组件的事件： 使用 $on 接受
+写在钩子函数内：例如：mounted   created都可以
+1 Bus.$on('msg', (e) => {
+2   this.examineNum = e;
+3 })
+
+
+2019.11.12
+如果要进行input只读，不允许输入值的时候，利用只读功能；
+<el-input type="text" :readonly="true Or false"></el-input>
+
+2019.11.25
+async await 学习，了解
+// 实现element表格多选变成单选
+this.$refs.multipleTable.toggleRowSelection(this.onceTable[0])
