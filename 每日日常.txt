@@ -490,3 +490,28 @@ elenement时间组件
 async await 学习，了解
 // 实现element表格多选变成单选
 this.$refs.multipleTable.toggleRowSelection(this.onceTable[0])
+
+2019.12.9
+前端查看PDF东西，由<embed :src="embedOnce" width="100%" height="600px"/>；src为后端接口，直接调用，不用理会
+返回值来进行src赋值。
+
+2019.12.11
+tortoiseGit 小乌龟git提交器
+
+2019.12.13
+.native事件修饰符，若是不使用此修饰符，则无法监听到el-input事件。
+<el-input v-model="scope.row.contentCount" style="width: 40px;" @keydown.native="keyCount(scope.row)" maxLength="3"></el-input>
+
+2019.12.16
+element-table
+表格默认选中
+      this.$refs.multipleTable.toggleRowSelection() 括号里面填写某个值，或者循环将数组中的对象，放进去
+表格取消勾选
+      this.$refs.multipleTable.clearSelection()
+
+2019.12.18
+      this.tableDataDialogAJ5.forEach((item) => {
+        item.caseNoTwo = this.editCaseNo
+      })
+      this.tableDataDialogAJ5 = JSON.parse(JSON.stringify(this.tableDataDialogAJ5))
+在forEach里面循环更新了数据，但是在视图层未更新，则需要将以更新的数组，进行重新赋值。

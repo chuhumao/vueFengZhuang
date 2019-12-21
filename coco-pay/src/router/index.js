@@ -17,28 +17,16 @@ export default new Router({
       meta: {title: '首页'},
       children: [
         {
-          path: '/information/information',
-          name: 'information',
-          component: () => import('../components/information/information.vue'),
-          meta: {title: '信息面板'}
+          path: '/agrentManage/MerchantList',
+          name: 'MerchantList',
+          component: () => import('../view/agrentManage/MerchantList.vue'),
+          meta: {title: '商户列表'}
         },
         {
           path: '/agrentManage/BasicInfo',
           name: 'BasicInfo',
-          component: () => import('../components/agrentManage/BasicInfo.vue'),
-          meta: {title: '基本信息'}
-        },
-        {
-          path: '/agrentManage/MerchantList',
-          name: 'MerchantList',
-          component: () => import('../components/agrentManage/MerchantList.vue'),
-          meta: {title: '商户列表'}
-        },
-        {
-          path: '/fund/fundWater',
-          name: 'fundWater',
-          component: () => import('../components/fund/fundWater.vue'),
-          meta: {title: '资金流水'}
+          component: () => import('../view/agrentManage/BasicInfo.vue'),
+          meta: {title: '购物车'}
         },
       ]
     },

@@ -61,26 +61,16 @@ export default {
           // imgSrc: require('../../assets/menu/merchantFamily.png'),
           routerLink: '/merchantManage',
           childrenList: [
+            {title: '商品列表', id: 11, routerLink: '/agrentManage/MerchantList'},
             {
-              title: '基本信息',
-              id: 11,
+              title: '购物车',
+              id: 12,
               routerLink: '/agrentManage/BasicInfo',
               selectJudgeImg: false,
               // imgSrc: require('../../assets/menu/merchantMessage.png'),
               // imgSrcTwo: require('../../assets/menu/merchantMessageTwo.png')
             },
-            {title: '商户列表', id: 12, routerLink: '/agrentManage/MerchantList'},
           ]
-        },
-        {
-          title: '信息面板',
-          id: 2,
-          routerLink: '/information/information'
-        },
-        {
-          title: '资金流水',
-          id: 3,
-          routerLink: '/fund/fundWater'
         }
       ]
     }
@@ -116,7 +106,7 @@ export default {
   },
   created () {
     // console.log(qs.stringify(sessionStorage.getItem('menuList')))
-    this.menuList = JSON.parse(sessionStorage.getItem('menuListArr')).length > 0 ? JSON.parse(sessionStorage.getItem('menuListArr')) : this.menuList
+    this.menuList = JSON.parse(sessionStorage.getItem('menuListArr')) ? JSON.parse(sessionStorage.getItem('menuListArr')) : this.menuList
   }
 }
 </script>

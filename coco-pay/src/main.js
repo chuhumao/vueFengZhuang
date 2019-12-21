@@ -6,10 +6,13 @@ import router from './router'
 import axios from 'axios'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import { valueIndex } from './JS/transitionText'
+import store from './store/state'
 Vue.use(Element)
 
 Vue.config.productionTip = false
+Vue.prototype.$valueIndex = valueIndex
+Vue.prototype.$store = store
 
 /* 防止未登录跳转到里面页面 */
 // router.beforeEach((to, from, next) => {

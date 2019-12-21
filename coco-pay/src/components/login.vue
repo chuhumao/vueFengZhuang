@@ -61,11 +61,16 @@ export default {
       /* this.$ref[val].validate((valid) => {
         if (valid) {}
       }) */
+      // 保存数据
+      this.$store.dispatch('setCount', 2)
       this.$router.push({path: '/Home'})
     },
     resetForm () {
 
     }
+  },
+  created () {
+    this.$router.push({path: '/Home'})
   }
 }
 </script>
