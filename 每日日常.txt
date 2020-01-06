@@ -515,3 +515,23 @@ element-table
       })
       this.tableDataDialogAJ5 = JSON.parse(JSON.stringify(this.tableDataDialogAJ5))
 在forEach里面循环更新了数据，但是在视图层未更新，则需要将以更新的数组，进行重新赋值。
+
+2019.12.30
+尾调用（Tail Call）是函数式编程的一个重要概念，本身非常简单，一句话就能说清楚。就是指某个函数的最后一步是调用另一个函数。
+
+for..in 和 for..of的区别
+for.in循环出来的内容是数组中的下标；
+而for.of循环出来的内容是数组中的value；
+
+var, let, const的区别
+var可以在全局使用，
+let是块级区部使用，
+const是唯一性，
+
+let也可以说是唯一性的，在同一个块级情况下，let不允许出现同一个变量
+
+2020.1.6 展示PDF
+若是使用第一种：则需要在标签内添加（type="application/pdf"）
+          <embed :src="embedOnce" type="application/pdf" width="100%" height="600px"/>
+若是使用第二种：则可以直接显示（目前未发现有问题）
+          <!--<iframe :src="embedOnce" width="100%" height="600px"></iframe>-->
