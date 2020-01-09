@@ -535,3 +535,14 @@ let也可以说是唯一性的，在同一个块级情况下，let不允许出现同一个变量
           <embed :src="embedOnce" type="application/pdf" width="100%" height="600px"/>
 若是使用第二种：则可以直接显示（目前未发现有问题）
           <!--<iframe :src="embedOnce" width="100%" height="600px"></iframe>-->
+
+
+2020.1.8 
+clientX 和 clientY
+client是指 鼠标点击有效区域获取到的 有效区域坐标值与浏览器相隔的 X（左）Y（上）值。
+offsetX 和 offsetY
+offsetX，offsetY，针对目标元素的左上角坐标，从padding开始。
+screenX 和 screenY
+screen是指 鼠标点击地方，与屏幕左上角的距离有多远。已经不再是浏览器的距离了。
+pageX 和 pageY
+page是指浏览器左上角的距离。
